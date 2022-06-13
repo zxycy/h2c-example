@@ -9,6 +9,9 @@ import (
 	"time"
 )
 
+var PemPath = "./TLS/server.crt"
+var KeyPath = "./TLS/server.key"
+
 func NewServer(bindAddr string, handler http.Handler) (server *http.Server, err error) {
 	if handler == nil {
 		return nil, errors.New("server needs handler to handle request")
@@ -27,10 +30,13 @@ func NewServer(bindAddr string, handler http.Handler) (server *http.Server, err 
 	return
 }
 
-func StartServer()  {
-	route:=gin.New()
+func StartServer(scheme string) {
+	route := gin.New()
 	AddService(route)
-	ser,_:=NewServer("127.0.0.1:8888",route)
-	ser.ListenAndServe()
+	server, _ := NewServer("127.0.0.1:8888", route)
+	if scheme == "http" {
+		server.ListenAndServe()
+	} else if scheme == "https" {
+		server.ListenAndServeTLS(PemPath, KeyPath)
+	}
 }
-

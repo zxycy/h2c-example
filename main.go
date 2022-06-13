@@ -6,18 +6,8 @@ import (
 	"time"
 )
 
-
-func main()  {
-	go server.StartServer()
-	client.Client()
+func main() {
+	go server.StartServer("http")
+	client.Client("http")
 	time.Sleep(10000000000000)
 }
-
-
-
-
-
-
-
-
-

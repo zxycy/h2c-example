@@ -19,8 +19,6 @@ type Route struct {
 // Routes is the list of the generated Route.
 type Routes []Route
 
-
-
 func AddService(engine *gin.Engine) *gin.RouterGroup {
 	group := engine.Group("/test")
 
@@ -53,7 +51,6 @@ var routes = Routes{
 		"/test1",
 		Test1,
 	},
-
 }
 
 // Index is the index handler.
